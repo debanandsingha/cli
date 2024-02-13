@@ -1,0 +1,24 @@
+---------------------------------------------------------------------------------------
+
+Service Management
+---------------------------------------------------------------------------------------
+	- services.msc is generally used to start/stop/enable process (GUI)
+	- net and sc utilities are used to do the same via CLI
+
+	- show running services
+		    → net start
+	- list all services along with service names
+		○ All running services:
+            → sc query type=service state=
+		    → sc query type= service state=all/inactive
+		    → sc queryex type=service state=….
+			    [state=active(default)/inactive/all]
+	- start/stop service
+		    → net start service_name
+		    → net stop service_name
+	- enable/disable service
+		    → sc config service_name start= demand
+		    → sc config service_name start= disabled
+	- start service automatically with boot
+		    → sc config service_name start= auto
+	• Administrator privileges are required for these operations.

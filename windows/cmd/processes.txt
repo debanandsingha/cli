@@ -1,0 +1,15 @@
+-----------------------------------------------------------------------------------------
+Process Management
+-----------------------------------------------------------------------------------------
+- Start PROCESS in Admin Mode 
+    → runas /user:user_name process_name
+- Check current user
+        → whoami
+        → %username%
+- shows the list of running processes
+        → tasklist
+- Stop/kill a process
+        → taskkill /f /im process.exe
+		    ○ /f parameter tells windows to forcefully terminate the process
+		    ○ /im parameter is used to identify and stop a process by its name
+        → taskkill /PID 1234

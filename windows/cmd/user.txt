@@ -1,0 +1,26 @@
+----------------------------------------------------------------------------------------------
+USER ACCOUNT
+----------------------------------------------------------------------------------------------
+	- list all users
+		→ net user
+	- detailed info about a user
+		→ net user username
+	- password reset
+		→ net user username * (forcefully)
+		→ net user username password
+	- Options/switches
+		→ /add => adds a new user
+		→ /delete => removes a user
+		→ /domain => force net user to execute on current domain controller instead of local computer
+	- active/deactivate user
+		→ /active:yes|no
+		→ /expires:date|never(default) 
+                => set an specific date after which the account expires
+			        date format: mm/dd/yy or mm/dd/yyyy
+		→ /passwordchg:yes|no 
+                => it specifies if the user can set its own password or not
+		→ /logonpasswordchg:yes|no  
+                => force user to change password on next logon
+		→ /comment:"text"  
+                => set description of the account
+		
