@@ -1,0 +1,108 @@
+CREATE TABLE department (
+	dept_name VARCHAR(50) PRIMARY KEY,
+	building VARCHAR(50),
+	budget INT
+);
+
+CREATE TABLE course (
+	course_id VARCHAR(20) PRIMARY KEY,
+	title VARCHAR(50),
+	credit INT,
+	dept_name VARCHAR(50),
+	FOREIGN KEY (dept_name) REFERENCES department (dept_name)
+);
+
+CREATE TABLE classroom (
+	building VARCHAR(50),
+	room_no INT,
+	capacity INT,
+	PRIMARY KEY (building, room_no)
+);
+
+CREATE TABLE instructor (
+	i_id INT PRIMARY KEY,
+	first_name VARCHAR(20) NOT NULL,
+	middle_name VARCHAR(20),
+	last_name VARCHAR(20) NOT NULL,
+	salary INT,
+	dept_name VARCHAR(50),
+	FOREIGN KEY (dept_name) REFERENCES department (dept_name)
+);
+
+CREATE TABLE student(
+	s_id INT PRIMARY KEY,
+	first_name VARCHAR(20) NOT NULL,
+	middle_name VARCHAR(20),
+	last_name VARCHAR(20) NOT NULL,
+	total_credit INT,
+	dept_name VARCHAR(50),
+	FOREIGN KEY (dept_name) REFERENCES department (dept_name)
+);
+
+CREATE TABLE time_slot(
+	time_slot_id INT PRIMARY KEY
+);
+
+CREATE TABLE time_slot_A(
+	time_slot_id INT,
+	day VARCHAR(10),
+	start_time TIME,
+	end_time TIME,
+	PRIMARY KEY (day, start_time),
+	FOREIGN KEY(time_slot_id) REFERENCES time_slot(time_slot_id)
+);
+
+CREATE TABLE section(
+	course_id VARCHAR(20),
+	sec_id VARCHAR(2),
+	semester INT,
+	year INT,
+	building VARCHAR(50),
+	room_no INT,
+	time_slot_id INT,
+	PRIMARY KEY(course_id, sec_id, semester, year),
+	FOREIGN KEY (course_id) REFERENCES course(course_id),
+	FOREIGN KEY(time_slot_id) REFERENCES time_slot(time_slot_id)
+);
+
+CREATE TABLE teaches (
+	i_id INT,
+	course_id VARCHAR(20),
+	sec_id VARCHAR(2),
+	semester INT,
+	year INT,
+	PRIMARY KEY(i_id, course_id, sec_id, semester, year)
+);
+
+CREATE TABLE takes (
+	s_id INT,
+	course_id VARCHAR(20),
+	sec_id VARCHAR(2),
+	semester INT,
+	year INT,
+	grade VARCHAR(4),
+	PRIMARY KEY(s_id, course_id, sec_id, semester, year)
+);
+
+CREATE TABLE prereqs (
+	prereq_id INT,
+	course_id VARCHAR(20),
+	PRIMARY KEY(prereq_id, course_id),
+	FOREIGN KEY(course_id) REFERENCES course(course_id)
+);
+
+CREATE TABLE advisor(
+	i_id INT,
+	s_id INT PRIMARY KEY,
+	FOREIGN KEY (i_id) REFERENCES instructor(i_id),
+	FOREIGN KEY (s_id) REFERENCES student(s_id)
+);
+
+
+Windows:
+	Export database:
+		mysqldump -u user_name-p database_name > /path/database_name.sql
+		
+	Import database:
+		mysql -u root -p database_name_1 < database_name.sql
+

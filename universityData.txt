@@ -1,0 +1,86 @@
+INSERT INTO department (dept_name, building, budget) VALUES 
+('CSE', 'Computer Science Building', 100000),
+('ECE', 'Electrical Engineering Building', 120000),
+('CE', 'Civil Engineering Building', 90000),
+('IE', 'Industrial Engineering Building', 110000),
+('FET', 'Faculty of Engineering and Technology Building', 95000),
+('MCD', 'Multimedia Design and Communication', 105000);
+
+	UPDATE department
+	SET building = 'Multimedia Design and Communication'
+	WHERE dept_name = 'MCD';
+
+INSERT INTO course (course_id, title, credit, dept_name) VALUES 
+('CSE101', 'Introduction to Computer Science', 3, 'CSE'),
+('ECE201', 'Digital Electronics', 4, 'ECE'),
+('CE301', 'Structural Engineering', 4, 'CE'),
+('IE401', 'Operations Research', 3, 'IE'),
+('CSE102', 'Data Structures and Algorithms', 4, 'CSE');
+
+INSERT INTO classroom (building, room_no, capacity) VALUES 
+('Building A', 101, 50),
+('Building B', 201, 60),
+('Building A', 301, 40),
+('Building B', 401, 35),
+('Administrative Building', 501, 70);
+
+INSERT INTO instructor (i_id, first_name, middle_name, last_name, salary, dept_name) VALUES 
+(1, 'John', 'Doe', 'Smith', 60000, 'CSE'),
+(2, 'Jane', 'D.', 'Johnson', 65000, 'ECE'),
+(3, 'Michael', 'A.', 'Williams', 70000, 'CE'),
+(4, 'Emily', 'L.', 'Brown', 75000, 'IE'),
+(5, 'David', 'W.', 'Miller', 80000, 'FET');
+
+INSERT INTO student (s_id, first_name, middle_name, last_name, total_credit, dept_name) VALUES 
+(1, 'Alice', 'A.', 'Smith', 120, 'CSE'),
+(2, 'Bob', 'B.', 'Johnson', 100, 'ECE'),
+(3, 'Charlie', 'C.', 'Williams', 90, 'CE'),
+(4, 'Diana', 'D.', 'Brown', 110, 'IE'),
+(5, 'Eva', 'E.', 'Miller', 95, 'FET');
+
+INSERT INTO time_slot (time_slot_id) VALUES 
+(1),
+(2),
+(3),
+(4),
+(5),
+(6),
+(7),
+(8);
+
+
+INSERT INTO time_slot_A (time_slot_id, day, start_time, end_time) VALUES
+(1, 'Monday', '08:30:00', '09:30:00'),
+(2, 'Monday', '09:30:00', '10:30:00'),
+(3, 'Monday', '10:30:00', '11:30:00');
+
+INSERT INTO section (course_id, sec_id, semester, year, building, room_no, time_slot_id) VALUES 
+('CSE101', 'A', 1, 2023, 'Building A', 101, 1),
+('ECE201', 'B', 2, 2023, 'Building B', 201, 2),
+('CE301', 'C', 3, 2023, 'Building A', 301, 3);
+
+INSERT INTO teaches (i_id, course_id, sec_id, semester, year) VALUES 
+(1, 'CSE101', 'A', 1, 2023),
+(2, 'ECE201', 'B', 2, 2023),
+(3, 'CE301', 'C', 3, 2023);
+
+INSERT INTO takes (s_id, course_id, sec_id, semester, year, grade) VALUES 
+(1, 'CSE101', 'A', 1, 2023, 'A'),
+(2, 'CSE201', 'B', 2, 2023, 'B'),
+(3, 'IE401', 'C', 4, 2023, 'C');
+
+INSERT INTO takes (s_id, course_id, sec_id, semester, year, grade) VALUES 
+(2, 'ECE201', 'B', 2, 2023, 'B');
+
+
+INSERT INTO prereqs (prereq_id, course_id) VALUES 
+(1, 'CSE101'),
+(2, 'ECE201'),
+(3, 'CE301');
+
+INSERT INTO advisor (i_id, s_id) VALUES 
+(1, 1),
+(2, 2),
+(3, 3);
+
+

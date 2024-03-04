@@ -1,0 +1,84 @@
+Table department {
+  dept_name varchar(50) [pk]
+  building varchar(50)
+  budget int
+}
+
+Table course {
+  course_id varchar(20) [pk]
+  title varchar(50)
+  credit int
+  dept_name varchar(50) [ref: > department.dept_name]
+}
+
+Table classroom {
+  building varchar(50) [pk]
+  room_no int [pk]
+  capacity int
+}
+
+Table instructor {
+  i_id int [pk]
+  first_name varchar(20) [not null]
+  middle_name varchar(20)
+  last_name varchar(20) [not null]
+  salary int
+  dept_name varchar(50) [ref: > department.dept_name]
+}
+
+Table student {
+  s_id int [pk]
+  first_name varchar(20) [not null]
+  middle_name varchar(20)
+  last_name varchar(20) [not null]
+  total_credit int
+  dept_name varchar(50) [ref: > department.dept_name]
+}
+
+Table time_slot {
+  time_slot_id int [pk]
+}
+
+Table time_slot_A {
+  time_slot_id int [pk, ref:> time_slot.time_slot_id]
+  day varchar(10) [pk]
+  start_time time [pk]
+  end_time time
+}
+
+Table section {
+  course_id varchar(20) [pk, ref:>course.course_id]
+  sec_id varchar(2) [pk]
+  semester int [pk]
+  year int [pk]
+  building varchar(50) [ref:> classroom.building]
+  room_no int [ref:> classroom.room_no]
+  time_slot_id int [ref:> time_slot.time_slot_id]
+}
+
+Table teaches {
+  i_id int [pk, ref:> instructor.i_id]
+  course_id varchar(20) [pk, ref:>course.course_id]
+  sec_id varchar(2) [pk, ref:>section.sec_id]
+  semester int [pk, ref:>section.semester]
+  year int [pk, ref:>section.year]
+}
+
+Table takes {
+  s_id int [pk, ref:>student.s_id]
+  course_id varchar(20) [pk, ref:>course.course_id]
+  sec_id varchar(2) [pk, ref:> section.sec_id]
+  semester int [pk, ref:> section.semester]
+  year int [pk, ref:> section.year]
+  grade varchar(4)
+}
+
+Table prereqs {
+  prereq_id int [pk]
+  course_id varchar(20) [pk, ref:>course.course_id]
+}
+
+Table advisor {
+  i_id int [ref:> instructor.i_id]
+  s_id int [pk, ref:> student.s_id]
+}
